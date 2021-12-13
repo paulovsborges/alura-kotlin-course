@@ -1,6 +1,6 @@
 package br.com.alura.collectiontest
 
-fun  testSet(){
+fun testSet() {
 
     val listWatchedAndroid: Set<String> = setOf("Alex", "Gui", "Fran", "Maria")
     val listWatchedKotlin: Set<String> = setOf("Alex", "Paulo", "Maria")

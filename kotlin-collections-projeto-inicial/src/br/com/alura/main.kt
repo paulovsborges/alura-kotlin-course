@@ -2,35 +2,53 @@ package br.com.alura
 
 fun main() {
 
-    val orders = mutableMapOf(
-        Pair(1, 20.0),
-        Pair(2, 14.0),
-        3 to 50.0,
-    )
+    val orders = mutableMapOf<Int, Double>(Pair(1, 20.0), Pair(2, 34.0), 3 to 50.0, 4 to 100.0, 5 to 150.0, 6 to 80.0)
 
-    println(orders)
+    val getOrder = orders.get(5)
+    println(getOrder)
 
-    val order = orders[1]
-    order?.let {
-        println("Pedido : $it")
+    val getOrElseOrders = orders.getOrElse(
+        0,
+    ) {
+        "there was an error"
+    }
+    val getOrDefaultOrders = orders.getOrElse(
+        0,
+    ) {
+        -1.0
     }
 
-    for (orderr in orders) {
-        println("Pedido: ${orderr.key}")
-        println("Valor: ${orderr.value}")
+    println(getOrElseOrders)
+    println(getOrDefaultOrders)
+
+    println(orders.keys)
+    println(orders.values)
+
+    orders.keys.forEach {
+        println("Orders: $it")
     }
 
-    orders[4] = 70.0
-    orders.put(5, 80.0)
-    orders[1] = 100.0
-    println(orders)
+    orders.values.forEach {
+        println("values: $it")
+    }
 
-    orders.putIfAbsent(6, 200.0)
-    println(orders)
-    orders.putIfAbsent(6, 300.0)
-    println(orders)
+    val pairsNumbers = orders.filter {(key, value) ->
+        key % 2 == 0 && value > 50.0
+    }
 
-    orders.remove(6, 200.0)
-    println(orders)
+    println(pairsNumbers)
+
+    val filterValues = orders.filterValues {
+        it > 50.0
+    }
+
+    println(filterValues)
+
+    val filterKeys = orders.filterKeys {
+        it % 2 == 0
+    }
+
+    println(filterKeys)
+
 }
 
