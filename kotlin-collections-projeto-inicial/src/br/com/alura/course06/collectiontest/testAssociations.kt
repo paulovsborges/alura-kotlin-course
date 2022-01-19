@@ -1,4 +1,4 @@
-package br.com.alura.collectiontest
+package br.com.alura.course06.collectiontest
 
 data class Order(val number: Int, val value: Double)
 

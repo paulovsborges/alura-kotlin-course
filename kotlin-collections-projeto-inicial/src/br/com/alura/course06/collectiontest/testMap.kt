@@ -1,4 +1,4 @@
-package br.com.alura.collectiontest
+package br.com.alura.course06.collectiontest
 
 fun testMap(){
 
