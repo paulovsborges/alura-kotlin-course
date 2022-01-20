@@ -22,7 +22,6 @@ fun testScopedFunctions(){
             each.let(::println)
         }
 
-
     Address("rua vergueiro", 3185).let { address ->
         "let block ${address.street}, ${address.number}".toUpperCase()
     }.let(::println)
