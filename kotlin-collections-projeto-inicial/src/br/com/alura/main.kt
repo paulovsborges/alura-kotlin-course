@@ -2,9 +2,12 @@ package br.com.alura
 
 fun main() {
 
-    Address("rua vergueiro", 3185).let { address ->
-        "${address.street}, ${address.number}".toUpperCase()
 
+    val numbers = mutableListOf(1, 2, 3)
+    numbers.run {
+        add(4)
+        add(5)
+        count { it >= 3 }
     }.let(::println)
 
     listOf(
@@ -14,7 +17,7 @@ fun main() {
         Address("rua vergueiro", 3185),
         Address("rua vergueiro", 3185)
     ).filter {
-        it.street.isNotEmpty()
+        it.street.isEmpty()
     }.map { it.number + 10 }
         .forEach { each ->
             each.let(::println)
@@ -32,6 +35,31 @@ fun main() {
             println("non authorized ")
         }
     }
+
+    Address("rua vergueiro", 3185).let { address ->
+        "let block ${address.street}, ${address.number}".toUpperCase()
+    }.let(::println)
+
+    Address("rua vergueiro", 3185).apply {
+        "apply block $street, $number".toUpperCase()
+    }.let(::println)
+
+    Address("rua vergueiro", 3185).run {
+        "run block $street, $number".toUpperCase()
+    }.let(::println)
+
+    with(Address("rua vergueiro", 3185)) {
+        " with block $street, $number".toUpperCase()
+    }.let(::println)
+
+    Address()
+        .also { println("creating address") }
+        .apply {
+            street = "rua vergueiro"
+            number = 15451
+        }
+        .also { println("address created") }
+        .let(::println)
 }
 
 fun authentication(password: Int, authorized: (Boolean) -> Unit) {
@@ -51,6 +79,6 @@ fun sumPlus(a: Int, b: Int, result: (Int) -> Unit) {
     println("after the sum")
 }
 
-data class Address(val street: String, val number: Int)
+data class Address(var street: String = "", var number: Int = 0)
 
 
