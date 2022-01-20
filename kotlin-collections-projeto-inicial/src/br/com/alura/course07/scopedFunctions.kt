@@ -3,7 +3,6 @@ package br.com.alura.course07
 
 fun testScopedFunctions(){
 
-
     val numbers = mutableListOf(1, 2, 3)
     numbers.run {
         add(4)
@@ -24,9 +23,6 @@ fun testScopedFunctions(){
             each.let(::println)
         }
 
-    sumPlus(1, 2) {
-        println(it)
-    }
 
     Address("rua vergueiro", 3185).let { address ->
         "let block ${address.street}, ${address.number}".toUpperCase()
@@ -52,6 +48,12 @@ fun testScopedFunctions(){
         }
         .also { println("address created") }
         .let(::println)
+}
+
+fun testHighOrderFunction(){
+    sumPlus(1, 2) {
+        println(it)
+    }
 }
 
 fun sumPlus(a: Int, b: Int, result: (Int) -> Unit) {
