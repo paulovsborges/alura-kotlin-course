@@ -1,63 +1,83 @@
 package br.com.alura
 
 fun main() {
+
+//    val address = Address("rua vergueiro", 3185)
 //
-//    testFunctionClass()
-//    testFunctionReference()
+//    val upperCaseAddress = "${address.street}, ${address.number}".toUpperCase()
+//
+//    println(upperCaseAddress)
 
+    val upperCaseAddress = Address("rua vergueiro", 3185).let { address ->
+        "${address.street}, ${address.number}".toUpperCase()
 
-    val myFunctionLambda: (Int, Int) -> Int = { a, b ->
-        a + b
-    }
+    }.let(::println)
 
-    println(myFunctionLambda(15, 10))
+//        .let { upperCaseAddress ->
+//        println(upperCaseAddress)
+//    }
 
-    val anonymousFunction: (Int, Int) -> Int = fun(a, b): Int {
-        println("execute as anonymous")
-        return a + b
-    }
-    println(anonymousFunction(20, 10))
+//    println(upperCaseAddress)
 
-    val calculateBonus: (salary: Double) -> Double = lambda@{salary ->
-
-        if (salary > 1000.0) {
-            return@lambda salary + 50
+    listOf(
+        Address("home", 3185),
+        Address("aartment", 3185),
+        Address("house", 3185),
+        Address("rua vergueiro", 3185),
+        Address("rua vergueiro", 3185)
+    ).filter {
+        it.street.isNotEmpty()
+    }.map { it.number + 10 }
+        .forEach { each ->
+            each.let(::println)
         }
-        salary + 100.0
+
+    sumPlus(1, 2) {
+        println(it)
     }
 
-    println(calculateBonus(1100.0))
+    val authentically = object : Authenticate {
 
-    val calculateBonusAnonymous : (salary: Double ) -> Double = fun(salary): Double{
-        if(salary > 1000.0) return salary + 50
-        return salary + 100.0
+        val password = 1234
+
+        override fun authenticate(password: Int): Boolean {
+            return this.password == password
+        }
     }
 
-    println(calculateBonusAnonymous(1100.0))
-}
+    authentication(125415434){
 
-fun testFunctionClass() {
-
-    val myFunctionClass: (Int, Int) -> Int = PlusSum()
-    println(myFunctionClass(10, 10))
-
-}
-
-fun testFunctionReference() {
-
-//    val myFunction: () -> Unit = ::plusSum
-    val myFunction: (Int, Int) -> Int = ::plusSum
-
-    println(myFunction(5, 10))
-}
-
-fun plusSum(a: Int, b: Int): Int {
-    return a + b
-}
-
-class PlusSum : (Int, Int) -> Int {
-    override fun invoke(p1: Int, p2: Int): Int {
-        return p1 + p2
+        if(it){
+            println("authorized")
+        }else{
+            println("non authorized ")
+        }
     }
 }
+
+fun authentication(password: Int, authorized : (Boolean) -> Unit){
+
+    val pass = 1234
+
+    if(password == pass){
+        authorized.invoke(true)
+    }else{
+        authorized.invoke(false)
+    }
+}
+
+fun sumPlus(a: Int, b: Int, result: (Int) -> Unit) {
+    println("before the sum")
+    result(a + b)
+    println("after the sum")
+}
+
+data class Address(val street: String, val number: Int)
+
+interface Authenticate {
+
+    fun authenticate(password: Int): Boolean
+}
+
+
 
