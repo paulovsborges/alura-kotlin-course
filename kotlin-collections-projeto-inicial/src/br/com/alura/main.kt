@@ -2,22 +2,10 @@ package br.com.alura
 
 fun main() {
 
-//    val address = Address("rua vergueiro", 3185)
-//
-//    val upperCaseAddress = "${address.street}, ${address.number}".toUpperCase()
-//
-//    println(upperCaseAddress)
-
-    val upperCaseAddress = Address("rua vergueiro", 3185).let { address ->
+    Address("rua vergueiro", 3185).let { address ->
         "${address.street}, ${address.number}".toUpperCase()
 
     }.let(::println)
-
-//        .let { upperCaseAddress ->
-//        println(upperCaseAddress)
-//    }
-
-//    println(upperCaseAddress)
 
     listOf(
         Address("home", 3185),
@@ -36,32 +24,23 @@ fun main() {
         println(it)
     }
 
-    val authentically = object : Authenticate {
+    authentication(1234) {
 
-        val password = 1234
-
-        override fun authenticate(password: Int): Boolean {
-            return this.password == password
-        }
-    }
-
-    authentication(125415434){
-
-        if(it){
+        if (it) {
             println("authorized")
-        }else{
+        } else {
             println("non authorized ")
         }
     }
 }
 
-fun authentication(password: Int, authorized : (Boolean) -> Unit){
+fun authentication(password: Int, authorized: (Boolean) -> Unit) {
 
     val pass = 1234
 
-    if(password == pass){
+    if (password == pass) {
         authorized.invoke(true)
-    }else{
+    } else {
         authorized.invoke(false)
     }
 }
@@ -73,11 +52,5 @@ fun sumPlus(a: Int, b: Int, result: (Int) -> Unit) {
 }
 
 data class Address(val street: String, val number: Int)
-
-interface Authenticate {
-
-    fun authenticate(password: Int): Boolean
-}
-
 
 
