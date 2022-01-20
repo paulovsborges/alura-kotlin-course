@@ -9,7 +9,6 @@ fun testLambdaAnonymousFunction(){
     }
     println(anonymousFunction(20, 10))
 
-
     val calculateBonusAnonymous: (salary: Double) -> Double = fun(salary): Double {
         if (salary > 1000.0) return salary + 50
         return salary + 100.0
