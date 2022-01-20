@@ -1,6 +1,5 @@
 package br.com.alura.course07
 
-
 fun testHOFWithReceivers(){
 
     plusReceiver(1, 2) {value ->

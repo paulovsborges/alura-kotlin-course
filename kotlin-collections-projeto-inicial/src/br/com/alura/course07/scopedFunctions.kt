@@ -1,6 +1,5 @@
 package br.com.alura.course07
 
-
 fun testScopedFunctions(){
 
     val numbers = mutableListOf(1, 2, 3)
