@@ -18,7 +18,6 @@ fun testLambdaAnonymousFunction(){
     println(calculateBonusAnonymous(1100.0))
 }
 
-
 fun testLambdaFunction(){
 
     val myFunctionLambda: (Int, Int) -> Int = { a, b ->
